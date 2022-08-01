@@ -12,6 +12,12 @@
     
     
     
+    <tags>
+      
+      <tag>Git</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -34,9 +40,15 @@
     <link href="/2022/06/27/About-Hexo/"/>
     <url>/2022/06/27/About-Hexo/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h3 id="关于Hexo"><a href="#关于Hexo" class="headerlink" title="关于Hexo"></a>关于Hexo</h3><p><a href="https://link.zhihu.com/?target=https://hexo.io/zh-cn/">Hexo</a>是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="https://link.zhihu.com/?target=http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。即把用户的markdown文件，按照指定的主题解析成静态网页。</p><h3 id="如何部署"><a href="#如何部署" class="headerlink" title="如何部署"></a>如何部署</h3><p>windows 需要安装Git</p><p>安装Node.js</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>nodejs.org<span class="hljs-regexp">/en/</span>download/ 访问官方网站下载<br>使用 Node.js 官方安装程序时，请确保勾选 Add to PATH 选项（默认已勾选）<br></code></pre></td></tr></table></figure><p>安装Hexo </p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span><br></code></pre></td></tr></table></figure><p>验证是否安装成功</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo -v</span><br></code></pre></td></tr></table></figure><p>开始创建博客</p><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">hexo  init <span class="hljs-variable">&lt;folder&gt;</span> <span class="hljs-comment"># 初始化该 文件架</span><br>cd <span class="hljs-variable">&lt;folder&gt;</span><br>npm install  <span class="hljs-comment"># 更新npm包的依赖</span><br></code></pre></td></tr></table></figure><p>预览页面  执行下列指令 即可预览页面 </p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs verilog">hexo clean<br># 清除缓存，可用简略写法 hexo cl<br>hexo <span class="hljs-keyword">generate</span><br># 生成静态页面，可用简略写法 hexo g<br>hexo server<br># 本地运行，可用简略写法 hexo s<br></code></pre></td></tr></table></figure><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+    </tags>
     
   </entry>
   
