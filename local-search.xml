@@ -8,7 +8,7 @@
     <link href="/2022/08/01/About-C/"/>
     <url>/2022/08/01/About-C/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="1-指针"><a href="#1-指针" class="headerlink" title="1.指针"></a>1.指针</h1><p>指针本身是一个对象，但是它又指向另一个对象，这是指针的两种属性</p><ul><li>指针本身是一个常量，指针的指向也是一个常量，也就是说不能改变指针的指向，称其为顶层const</li><li>指针指向的对象是一个常量，即指针指向的地址的值是一个常量，不能改变指针指向内存的值，cheng’wei</li></ul>]]></content>
     
     
     
