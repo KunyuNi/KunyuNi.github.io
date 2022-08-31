@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.指针指针本身是一个对象，但是它又指向另一个对象，这是指针的两种属性  指针本身是一个常量，指针的指向也是一个常量，也就是说不能改变指针的指向，称其为顶层const(top-level const )  顶层const 表示指针本身就是一个常量 1int* cosnt p1 &#x3D; &amp;a;&#x2F;&#x2F;p1是顶层const  ​  指针指向的对象是一个常量，即指针指向的地址的值是一个常量，不能改变指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="About-C++">
+<meta property="og:url" content="http://example.com/2022/08/01/About-C/index.html">
+<meta property="og:site_name" content="KyCoder">
+<meta property="og:description" content="1.指针指针本身是一个对象，但是它又指向另一个对象，这是指针的两种属性  指针本身是一个常量，指针的指向也是一个常量，也就是说不能改变指针的指向，称其为顶层const(top-level const )  顶层const 表示指针本身就是一个常量 1int* cosnt p1 &#x3D; &amp;a;&#x2F;&#x2F;p1是顶层const  ​  指针指向的对象是一个常量，即指针指向的地址的值是一个常量，不能改变指针">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-01T12:15:28.000Z">
+<meta property="article:modified_time" content="2022-08-10T14:55:23.967Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>About-C++ - KyCoder</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>A Record about My Programming</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="About-C++"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-01 20:15" pubdate>
+          2022年8月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">About-C++</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-指针"><a href="#1-指针" class="headerlink" title="1.指针"></a>1.指针</h1><p>指针本身是一个对象，但是它又指向另一个对象，这是指针的两种属性</p>
+<ul>
+<li><p>指针本身是一个常量，指针的指向也是一个常量，也就是说不能改变指针的指向，称其为顶层const(top-level const )</p>
+</li>
+<li><p>顶层const 表示指针本身就是一个常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">int</span>* cosnt p1 = &amp;a;<span class="hljs-comment">//p1是顶层const</span><br></code></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+<li><p>指针指向的对象是一个常量，即指针指向的地址的值是一个常量，不能改变指针指向内存的值，称为底层const(low-level const）</p>
+</li>
+<li><p>底层const表示指针指向的对象是一个常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">cosnt <span class="hljs-type">int</span>* p2 = &amp;a;<span class="hljs-comment">//p2是底层const</span><br></code></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> *<span class="hljs-type">const</span> p1 = &amp;i;       <span class="hljs-comment">// 不能改变p1的值，这是一个顶层const</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> ci = <span class="hljs-number">42</span>;        <span class="hljs-comment">// 不能改变ci的值，这是一个顶层const</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *p2 = &amp;ci;      <span class="hljs-comment">// 允许改变p2的值，这是一个底层const</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *<span class="hljs-type">const</span> p3 = p2; <span class="hljs-comment">// 靠右的const是顶层const，靠左的const是底层const</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;r = ci;        <span class="hljs-comment">// 用于声明引用的const都是底层const</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="指向常量的引用"><a href="#指向常量的引用" class="headerlink" title="指向常量的引用"></a>指向常量的引用</h2><p>程序里有一个<strong>对象r</strong>（C++里对象即变量，可以理解为同义词），现在我想设置一个<strong>【引用】</strong>来<strong>【绑定】</strong>它，但有一个要求：不能<strong>【通过这个引用】</strong>来<strong>【修改】</strong>这个对象的值，但允许通过这个引用来<strong>【读取】</strong>这个对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> r = <span class="hljs-number">1</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;R = r;  <span class="hljs-comment">//引用R绑定了r</span><br>cout &lt;&lt; R;  <span class="hljs-comment">//正确：允许通过引用R读取r的值</span><br>R = <span class="hljs-number">2</span>;      <span class="hljs-comment">//错误：终端提示“ assignment of read-only reference &#x27;R&#x27; ”</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="指向常量的指针"><a href="#指向常量的指针" class="headerlink" title="指向常量的指针"></a>指向常量的指针</h2><p>程序里有一个<strong>对象r</strong>，现在我想设置一个<strong>【指针】</strong>来<strong>【指向】</strong>它，但有一个要求：不能<strong>【通过这个指针】</strong>来<strong>【修改】</strong>这个对象的值，但允许通过这个指针来<strong>【读取】</strong>这个对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> r = <span class="hljs-number">1</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *p = &amp;r;  <span class="hljs-comment">//指针p指向了r</span><br>cout &lt;&lt; *p;  <span class="hljs-comment">//正确：允许通过指针p读取r的值</span><br>*p = <span class="hljs-number">2</span>;      <span class="hljs-comment">//错误：终端提示“ assignment of read-only location &#x27;* p&#x27; ”</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="常量指针"><a href="#常量指针" class="headerlink" title="常量指针"></a>常量指针</h2><p>房子里面的东西可以变，房子的地址不能变</p>
+<p>指向不能变</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> x = <span class="hljs-number">1</span>, y = <span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> *<span class="hljs-type">const</span> p = &amp;x;  <span class="hljs-comment">//指针p指向了x</span><br>*p = <span class="hljs-number">2</span>;     <span class="hljs-comment">//正确：允许通过指针p读取和修改x的值</span><br>p = &amp;y;     <span class="hljs-comment">//错误：终端提示“ assignment of read-only variable &#x27;p&#x27; ”</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="指针和引用的区别"><a href="#指针和引用的区别" class="headerlink" title="指针和引用的区别"></a>指针和引用的区别</h2><ol>
+<li><p>引用不是对象，不分配内存。 指针是对象，分配内存</p>
+<p>引用定义时必须初始化，且只与初始时的对象所绑定，作为该对象的<strong>别名</strong>【而指针本身就是一个<strong>对象</strong>，使用<code>size(引用)</code>得到的是所绑定的对象的类型大小，而<code>sizeof(指针)</code>得到的是这个指针对象本身的类型大小】。</p>
+</li>
+<li><p>引用是类型安全的，而指针不是</p>
+<p>由于必须初始化且与一个对象一直绑定，因此不存在空引用，但指针指向可以随意更改（指针其实也可以理解为一个普通变量，只不过它的变量值是一个地址值，较特别），且允许存在空指针和野指针（野指针可以在多种场景下产生，其中一种情况是当多个指针指向一块内存，free掉一个指针之后，那么别的指针就成为了野指针）。因此引用是类型安全的，而指针不是。类型安全即内存安全。</p>
+</li>
+</ol>
+<h1 id="2-关于const"><a href="#2-关于const" class="headerlink" title="2.关于const"></a>2.关于const</h1><ul>
+<li><p><strong>底层const</strong>:若【通过】<strong>某</strong>【指针&#x2F;引用】<strong>无法对所</strong>【指向&#x2F;绑定】<strong>的对象进行</strong>【值修改】，我们就称该【指针&#x2F;引用】为一个<code>底层const</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> m = <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> &amp;M = m;         <span class="hljs-comment">//错误：普通的int&amp;不能绑定到int整型常量上（反证法：如果可以，那通过M就能修改m的值，这样就和m是常量的规定发生冲突）</span><br><span class="hljs-type">int</span> r = <span class="hljs-number">2</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;R = r;   <span class="hljs-comment">//这就是上面的例子。等号右侧的表达式`r`其类型是`int整型`，可以转换成int整型常量`，因此不会报错</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;x = <span class="hljs-number">10</span>;  <span class="hljs-comment">//等号右侧的表达式`10`其类型为`整型字面值常量`，可以转换成`int整型常量`</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;y = r*<span class="hljs-number">2</span>+<span class="hljs-number">3</span>;  <span class="hljs-comment">//等号右侧表达式的计算结果同样为`整型字面值常量`</span><br></code></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+<li><p><strong>顶层const</strong>:若对象<strong>【自身是一个常量】</strong>，不可变，则自身就是<code>顶层const</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> x = <span class="hljs-number">1</span>;  <span class="hljs-comment">//x就是一个顶层const</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="关于NULL和nullptr"><a href="#关于NULL和nullptr" class="headerlink" title="关于NULL和nullptr"></a>关于NULL和nullptr</h1>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Func_serven</span><span class="hljs-params">(<span class="hljs-type">void</span>* serven_void)</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;I am void fucntion!&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Func_serven</span><span class="hljs-params">(<span class="hljs-type">int</span> serven_zero)</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;I am zero fucntion!&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">Func_serven</span>(<span class="hljs-literal">NULL</span>);<br>    <span class="hljs-built_in">Func_serven</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+  <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">执行结果如下 <br><span class="hljs-built_in">I</span> <span class="hljs-variable">am</span> <span class="hljs-variable">zero</span> <span class="hljs-variable">fucntion</span><span class="hljs-operator">!</span><br><span class="hljs-built_in">I</span> <span class="hljs-variable">am</span> <span class="hljs-variable">zero</span> <span class="hljs-variable">fucntion</span><span class="hljs-operator">!</span><br><br><span class="hljs-built_in">E</span><span class="hljs-operator">:</span>\<span class="hljs-variable">c</span><span class="hljs-operator">++</span>\<span class="hljs-variable">code</span>\<span class="hljs-operator">.</span><span class="hljs-variable">vscode</span>\<span class="hljs-built_in">C</span><span class="hljs-operator">++</span><span class="hljs-number">3</span>\<span class="hljs-variable">x64</span>\<span class="hljs-built_in">Debug</span>\<span class="hljs-variable">test</span> <span class="hljs-variable">NULL</span> 和<span class="hljs-variable">nullptr</span><span class="hljs-operator">.</span><span class="hljs-variable">exe</span> <span class="hljs-punctuation">(</span>进程 <span class="hljs-number">29168</span><span class="hljs-punctuation">)</span>已退出，代码为 <span class="hljs-number">0</span>。<br>按任意键关闭此窗口<span class="hljs-operator">.</span> <span class="hljs-operator">.</span> <span class="hljs-operator">.</span><br><br></code></pre></td></tr></table></figure>
+
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Func_serven</span><span class="hljs-params">(<span class="hljs-type">void</span>* serven_void)</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;I am void fucntion!&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Func_serven</span><span class="hljs-params">(<span class="hljs-type">int</span> serven_zero)</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;I am zero fucntion!&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">Func_serven</span>((<span class="hljs-type">void</span>*)<span class="hljs-literal">NULL</span>);<span class="hljs-comment">// 强制转为空指针</span><br>    <span class="hljs-built_in">Func_serven</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+  <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">I</span> <span class="hljs-variable">am</span> <span class="hljs-variable">void</span> <span class="hljs-variable">fucntion</span><span class="hljs-operator">!</span><br><span class="hljs-built_in">I</span> <span class="hljs-variable">am</span> <span class="hljs-variable">zero</span> <span class="hljs-variable">fucntion</span><span class="hljs-operator">!</span><br><br><span class="hljs-built_in">E</span><span class="hljs-operator">:</span>\<span class="hljs-variable">c</span><span class="hljs-operator">++</span>\<span class="hljs-variable">code</span>\<span class="hljs-operator">.</span><span class="hljs-variable">vscode</span>\<span class="hljs-built_in">C</span><span class="hljs-operator">++</span><span class="hljs-number">3</span>\<span class="hljs-variable">x64</span>\<span class="hljs-built_in">Debug</span>\<span class="hljs-variable">test</span> <span class="hljs-variable">NULL</span> 和<span class="hljs-variable">nullptr</span><span class="hljs-operator">.</span><span class="hljs-variable">exe</span> <span class="hljs-punctuation">(</span>进程 <span class="hljs-number">21936</span><span class="hljs-punctuation">)</span>已退出，代码为 <span class="hljs-number">0</span>。<br>按任意键关闭此窗口<span class="hljs-operator">.</span> <span class="hljs-operator">.</span> <span class="hljs-operator">.</span><br><br></code></pre></td></tr></table></figure>
+
+<p>  查看源码中的NULL 定义如下：</p>
+<p>  发现NULL有二义性，即可表示 int 0 又可以表示 （void*） 0</p>
+  <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua">#ifndef NULL<br>    #ifdef __cplusplus<br>        #define NULL <span class="hljs-number">0</span><br>    #<span class="hljs-keyword">else</span><br>        #define NULL ((void *)<span class="hljs-number">0</span>)<br>    #endif<br>#endif<br></code></pre></td></tr></table></figure>
+
+<p>  于是 C++11标准中引入了一个新的关键字nullptr</p>
+<p>  nullptr是nullptr_t类型的右值常量，专门用于初始化空指针</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">nullptr_t</span> ser_ptr;<br><span class="hljs-type">int</span>* serven_1 = ser_str;      <span class="hljs-comment">// 定义一个整型指针，指向空</span><br><br>  <span class="hljs-type">int</span>* serven_3 = <span class="hljs-literal">nullptr</span>;<br>  <span class="hljs-type">char</span>* serven_4 = <span class="hljs-literal">nullptr</span>;<br>  <span class="hljs-type">double</span>* serven_5 = <span class="hljs-literal">nullptr</span>;<br><br></code></pre></td></tr></table></figure>
+
+
+<p>  <strong>总结 使用nullptr可以使得我们的程序更加健壮</strong></p>
+<h1 id="基于范围的for循环"><a href="#基于范围的for循环" class="headerlink" title="基于范围的for循环"></a>基于范围的for循环</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (declaration : expression)&#123;<br>    <span class="hljs-comment">//循环体</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>declaration：表示此处要定义一个变量，该变量的类型为要遍历序列中存储元素的类型。需要注意的是，C++ 11 标准中，declaration参数处定义的变量类型可以用 auto 关键字表示，该关键字可以使编译器自行推导该变量的数据类型。</li>
+<li>expression：表示要遍历的序列，常见的可以为事先定义好的普通数组或者容器，还可以是用 {} 大括号初始化的序列。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>About-C++</div>
+      <div>http://example.com/2022/08/01/About-C/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/22/c-multithreading/" title="c++ multithreading">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">c++ multithreading</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/02/About-Git/" title="About-Git">
+                        <span class="hidden-mobile">About-Git</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
