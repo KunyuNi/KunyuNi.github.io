@@ -1,7 +1,7 @@
 ---
 permalink: /
-title: ""
-excerpt: ""
+title: "Kunyu Ni"
+excerpt: "Academic Homepage"
 author_profile: true
 redirect_from: 
   - /about/
